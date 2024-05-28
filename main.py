@@ -69,6 +69,7 @@ def main():
                                 function(position) {
                                     let lat = position.coords.latitude;
                                     let lon = position.coords.longitude;
+                                    console.log(lat);
                                     let url = window.location.href + '?latitude=' + lat + '&longitude=' + lon;
                                     window.location.replace(url);
                                 },
@@ -80,8 +81,9 @@ def main():
                         """,
                         unsafe_allow_html=True
                     )
-                    latitude = st.experimental_get_query_params().get('latitude', None)
-                    longitude = st.experimental_get_query_params().get('longitude', None)
+                    if "latitude" not in st.session_state:
+                        st.session_state.latitude = st.experimental_get_query_params().get('latitude', None)
+                        st.session_state.longitude = st.experimental_get_query_params().get('longitude', None)
                     st.write(f"Lat:{latitude}")
     # JavaScript to get the geolocation and send it back to Streamlit
                 #     geolocation_script = """
