@@ -77,6 +77,8 @@ def main():
                                 params.set("latitude", latitude);
                                 params.set("longitude", longitude);
                                 params.set("accuracy", accuracy);
+
+                                console.log(latitude);
                 
                                 window.location.search = params.toString();
                             },
