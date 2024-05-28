@@ -84,7 +84,7 @@ def main():
                     if "latitude" not in st.session_state:
                         st.session_state.latitude = st.experimental_get_query_params().get('latitude', None)
                         st.session_state.longitude = st.experimental_get_query_params().get('longitude', None)
-                    st.write(f"Lat:{latitude}")
+                        st.write(f"Lat:{st.session_state.latitude}")
     # JavaScript to get the geolocation and send it back to Streamlit
                 #     geolocation_script = """
                 #     <script>
