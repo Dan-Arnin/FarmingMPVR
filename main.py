@@ -60,6 +60,7 @@ def main():
                     except:
                         st.write("Please upload a valid image")    
             else:
+                location = st.empty()
                 if st.button('Get Location'):
     # JavaScript to get the geolocation and send it back to Streamlit
                     geolocation_script = """
