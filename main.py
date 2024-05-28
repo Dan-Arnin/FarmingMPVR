@@ -60,41 +60,43 @@ def main():
                     except:
                         st.write("Please upload a valid image")    
             else:
-                location = st.empty()
-
-                # JavaScript to get the geolocation and send it back to Streamlit
-                geolocation_script = """
-                <script>
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
-                        const accuracy = position.coords.accuracy;
-
-                        // Send data to Streamlit via URL parameters
-                        const params = new URLSearchParams(window.location.search);
-                        params.set("latitude", latitude);
-                        params.set("longitude", longitude);
-                        params.set("accuracy", accuracy);
-
-                        window.location.search = params.toString();
-                    },
-                    (error) => {
-                        console.error(error);
-                        alert('Unable to retrieve your location');
+                if st.button('Get Location'):
+    # JavaScript to get the geolocation and send it back to Streamlit
+                    geolocation_script = """
+                    <script>
+                    function getLocation() {
+                        navigator.geolocation.getCurrentPosition(
+                            (position) => {
+                                const latitude = position.coords.latitude;
+                                const longitude = position.coords.longitude;
+                                const accuracy = position.coords.accuracy;
+                
+                                // Send data to Streamlit via URL parameters
+                                const params = new URLSearchParams(window.location.search);
+                                params.set("latitude", latitude);
+                                params.set("longitude", longitude);
+                                params.set("accuracy", accuracy);
+                
+                                window.location.search = params.toString();
+                            },
+                            (error) => {
+                                console.error(error);
+                                alert('Unable to retrieve your location');
+                            }
+                        );
                     }
-                );
-                </script>
-                """
-
-                # Embedding the JavaScript code in the Streamlit app
-                components.html(geolocation_script)
-
+                    getLocation();
+                    </script>
+                    """
+                    # Embedding the JavaScript code in the Streamlit app
+                    components.html(geolocation_script)
+                
                 # Extract the geolocation data from URL parameters
-                latitude = st.query_params().get("latitude", [None])[0]
-                longitude = st.query_params().get("longitude", [None])[0]
-                accuracy = st.query_params().get("accuracy", [None])[0]
-
+                query_params = st.experimental_get_query_params()
+                latitude = query_params.get("latitude", [None])[0]
+                longitude = query_params.get("longitude", [None])[0]
+                accuracy = query_params.get("accuracy", [None])[0]
+                
                 if latitude and longitude:
                     location.write(f"Latitude: {latitude}, Longitude: {longitude}, Accuracy: {accuracy} meters")
                 else:
