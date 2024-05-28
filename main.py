@@ -94,8 +94,6 @@ def main():
                 
                 # Extract the geolocation data from URL parameters
                 
-                print("#################################")
-                print(query_params)
                 if "latitude" not in st.session_state:
                     query_params = st.experimental_get_query_params()
                     st.session_state.latitude = query_params.get("latitude", [None])[0]
