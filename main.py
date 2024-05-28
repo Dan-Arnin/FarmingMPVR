@@ -93,7 +93,7 @@ def main():
                     components.html(geolocation_script)
                 
                 # Extract the geolocation data from URL parameters
-                query_params = st.experimental_get_query_params()
+                query_params = st.query_params()
                 print("#################################")
                 print(query_params)
                 latitude = query_params.get("latitude", [None])[0]
