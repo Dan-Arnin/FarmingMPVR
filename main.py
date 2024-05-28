@@ -62,45 +62,47 @@ def main():
             else:
                 location = st.empty()
                 if st.button('Get Location'):
+                    if "getting_location" not in st.session_state:
+                        st.session_state.getting_location = True
     # JavaScript to get the geolocation and send it back to Streamlit
-                    geolocation_script = """
-                    <script>
-                    function getLocation() {
-                        navigator.geolocation.getCurrentPosition(
-                            (position) => {
-                                const latitude = position.coords.latitude;
-                                const longitude = position.coords.longitude;
-                                const accuracy = position.coords.accuracy;
-
-                                console.log(latitude);
-                
-                                // Send data to Streamlit via URL parameters
-                                const params = new URLSearchParams(window.location.search);
-                                params.set("latitude", latitude);
-                                params.set("longitude", longitude);
-                                params.set("accuracy", accuracy);
-                
-                                window.location.search = params.toString();
-                            },
-                            (error) => {
-                                console.error(error);
-                                alert('Unable to retrieve your location');
-                            }
-                        );
-                    }
-                    getLocation();
-                    </script>
-                    """
-                    # Embedding the JavaScript code in the Streamlit app
-                    components.html(geolocation_script)
-                
-                # Extract the geolocation data from URL parameters
-                
-                if "latitude" not in st.session_state:
-                    query_params = st.experimental_get_query_params()
-                    st.session_state.latitude = query_params.get("latitude", [None])[0]
-                    st.session_state.longitude = query_params.get("longitude", [None])[0]
-                    st.write(f"Lat:{st.session_state.latitude}")
+                        geolocation_script = """
+                        <script>
+                        function getLocation() {
+                            navigator.geolocation.getCurrentPosition(
+                                (position) => {
+                                    const latitude = position.coords.latitude;
+                                    const longitude = position.coords.longitude;
+                                    const accuracy = position.coords.accuracy;
+    
+                                    console.log(latitude);
+                    
+                                    // Send data to Streamlit via URL parameters
+                                    const params = new URLSearchParams(window.location.search);
+                                    params.set("latitude", latitude);
+                                    params.set("longitude", longitude);
+                                    params.set("accuracy", accuracy);
+                    
+                                    window.location.search = params.toString();
+                                },
+                                (error) => {
+                                    console.error(error);
+                                    alert('Unable to retrieve your location');
+                                }
+                            );
+                        }
+                        getLocation();
+                        </script>
+                        """
+                        # Embedding the JavaScript code in the Streamlit app
+                        components.html(geolocation_script)
+                    
+                    # Extract the geolocation data from URL parameters
+                    
+                    if "latitude" not in st.session_state:
+                        query_params = st.experimental_get_query_params()
+                        st.session_state.latitude = query_params.get("latitude", [None])[0]
+                        st.session_state.longitude = query_params.get("longitude", [None])[0]
+                        st.write(f"Lat:{st.session_state.latitude}")
                     
 
     if st.session_state.results_print:
