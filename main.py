@@ -57,8 +57,8 @@ def main():
                         st.session_state.initial_upload = False
                         st.session_state.results = results
                         
-                except:
-                    st.write("Please upload a valid image")    
+                except Exception as e:
+                    st.write(f"Please upload a valid image {e}")    
     #         else:
     #             location = st.empty()
     #             if st.button('Get Location'):
