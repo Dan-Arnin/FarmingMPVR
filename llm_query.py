@@ -1,6 +1,5 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import OpenAI
-from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 from langchain import globals
