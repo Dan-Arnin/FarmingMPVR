@@ -20,7 +20,7 @@ class ImageInformation(BaseModel):
     crops_suitable: str = Field(description="A small description on the types of crops suitable in India for that soil")
     short_description: str = Field(description="A 200 word description about the soil type and how its farmed in India")
 
-load_dotenv()
+
 
 parser = JsonOutputParser(pydantic_object=ImageInformation)
 
