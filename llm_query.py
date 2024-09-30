@@ -1,6 +1,5 @@
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import OpenAI
-from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 from langchain import globals
@@ -21,8 +20,6 @@ class ImageInformation(BaseModel):
     crops_suitable: str = Field(description="A small description on the types of crops suitable in India for that soil")
     short_description: str = Field(description="A 200 word description about the soil type and how it's farmed in India")
 
-
-load_dotenv()
 
 parser = JsonOutputParser(pydantic_object=ImageInformation)
 
